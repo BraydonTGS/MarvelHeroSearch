@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MarvelHeroSearch.Data;
+using MarvelHeroSearch.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,12 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+//Add to your Program.cs Before .Build() to enable Hot Reload //
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+
+// Dependency Injection //
+builder.Services.AddTransient<IMarvelApiClient, MarvelApiClient>();
 
 var app = builder.Build();
 
