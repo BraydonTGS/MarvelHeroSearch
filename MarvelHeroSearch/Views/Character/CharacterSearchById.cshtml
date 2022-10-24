@@ -89,7 +89,11 @@
 
                 <div class="d-flex justify-content-around align-items">
                     <div class="button-bnt"><a type="button" class="btn btn-lg btn-dark m-2 shadow" href="@Model.data.results[0].urls[0].url" target="blank">More Information</a></div>
-                    <div class="button-bnt"><a type="button" class="btn btn-lg btn-warning m-2 shadow" href="@Model.data.results[0].urls[1].url" target="blank">View Comics</a></div>
+                    <form asp-controller="Character" asp-action="GetComics">
+                        <div>
+                            <button class="btn btn-lg btn-warning m-2 shadow" id="submit" name="searchString" type="submit" style="font-weight:bold;" value="@Model.data.results[0].id">View Comics</button>
+                        </div>
+                    </form>
                     <div class="button-btn"><button type="button" class="btn btn-lg btn-success m-2 shadow">Add to Favorites</button></div>
                 </div>
                 <hr />

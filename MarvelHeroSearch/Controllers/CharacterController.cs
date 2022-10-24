@@ -41,6 +41,7 @@ namespace MarvelHeroSearch.Controllers
                 return View("CharacterNotFound");
 
             }
+
             var character = root.data.results[0];
 
             var myComics = _response.GetCharacterComics(character.comics.collectionURI);
@@ -50,10 +51,6 @@ namespace MarvelHeroSearch.Controllers
                 character.ComicBooks.Add(comic);
             }
 
-            if (character.description.Length > 360)
-            {
-                character.description = character.description.Substring(0, 360) + "...";
-            }
             if (character.description == "")
             {
                 character.description = "If You're Nothing Without The Suit, Then You Shouldn't Have It.";
@@ -86,10 +83,6 @@ namespace MarvelHeroSearch.Controllers
                 character.ComicBooks.Add(comic);
             }
 
-            if (character.description.Length > 360)
-            {
-                character.description = character.description.Substring(0, 360) + "...";
-            }
             if (character.description == "")
             {
                 character.description = "If You're Nothing Without The Suit, Then You Shouldn't Have It.";
@@ -124,6 +117,13 @@ namespace MarvelHeroSearch.Controllers
 
             return View(parsedCharacters);
         }
+
+        // Get a List of Comics for Each Character by ID //
+        public IActionResult GetComics()
+        {
+            return View();
+        }
+
 
         // Character Not Found //
         public IActionResult CharacterNotFound()
