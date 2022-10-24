@@ -10,7 +10,10 @@ namespace MarvelHeroSearch.Client
 
         public CharacterDataWrapper GetListOfCharacters();
 
+        public CharacterDataWrapper GetCharacterById(string id);
+
         public ComicDataWrapper GetCharacterComics(string id);
+
     }
 }
 

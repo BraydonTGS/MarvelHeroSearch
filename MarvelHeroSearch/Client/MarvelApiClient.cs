@@ -29,6 +29,7 @@ namespace MarvelHeroSearch.Client
         // Marvel API Client//
         HttpClient client = new HttpClient();
 
+        // Get Character by Name //
         public CharacterDataWrapper GetCharacter(string characterName)
         {
             // Assemble The URL //
@@ -41,6 +42,22 @@ namespace MarvelHeroSearch.Client
             return response;
         }
 
+        // Get Character by Id //
+        public CharacterDataWrapper GetCharacterById(string id)
+        {
+
+            // Assemble The URL //
+            string url = $"https://gateway.marvel.com/v1/public/characters/{id}?&ts=1&apikey={_publicKey}&hash={_md5Hash}";
+
+            // Response -> String -> JSON -> Deserialize //
+            var repo = client.GetStringAsync(url).Result;
+            var response = JsonSerializer.Deserialize<CharacterDataWrapper>(repo);
+
+            return response;
+        }
+
+
+        // Get List of Characters //
         public CharacterDataWrapper GetListOfCharacters()
         {
             // Random Number for the Offset //

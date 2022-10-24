@@ -50,22 +50,54 @@ namespace MarvelHeroSearch.Controllers
                 character.ComicBooks.Add(comic);
             }
 
-            // Character Name Length Shortened to Fit the Card //
-            if (character.name.Length > 15)
-            {
-                character.name = character.name.Substring(0, 15) + "...";
-            }
             if (character.description.Length > 360)
             {
                 character.description = character.description.Substring(0, 360) + "...";
             }
             if (character.description == "")
             {
-                character.description = "Wounded, captured and forced to build a weapon by his enemies, billionaire industrialist Tony Stark instead created an advanced suit of armor to save his life and escape captivity. Now with a new outlook on life, Tony uses his money and intelligence to make the world a safer, better place as Iron Man.";
+                character.description = "If You're Nothing Without The Suit, Then You Shouldn't Have It.";
             }
 
             return View(root);
         }
+
+        // Search for a Character by Id //
+        public IActionResult CharacterSearchById()
+        {
+            var characterId = Request.Form["searchString"];
+            if (string.IsNullOrWhiteSpace(characterId))
+            {
+                return View("CharacterNotFound");
+            }
+            var root = _response.GetCharacterById(characterId);
+
+            if (!root.data.results.Any())
+            {
+                return View("CharacterNotFound");
+
+            }
+            var character = root.data.results[0];
+
+            var myComics = _response.GetCharacterComics(character.comics.collectionURI);
+
+            foreach (var comic in myComics.data.results)
+            {
+                character.ComicBooks.Add(comic);
+            }
+
+            if (character.description.Length > 360)
+            {
+                character.description = character.description.Substring(0, 360) + "...";
+            }
+            if (character.description == "")
+            {
+                character.description = "If You're Nothing Without The Suit, Then You Shouldn't Have It.";
+            }
+
+            return View(root);
+        }
+
 
         // Get a List of 100 Random Characters //
         public IActionResult CharacterList()
@@ -93,6 +125,7 @@ namespace MarvelHeroSearch.Controllers
             return View(parsedCharacters);
         }
 
+        // Character Not Found //
         public IActionResult CharacterNotFound()
         {
             return View();
