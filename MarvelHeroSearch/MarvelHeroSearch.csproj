@@ -11,6 +11,9 @@
     <None Remove="Newtonsoft.Json" />
     <None Remove="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" />
     <None Remove="Client\" />
+    <None Remove="Models\Hero\" />
+    <None Remove="Models\HeroComics\" />
+    <None Remove="Views\Character\" />
   </ItemGroup>
   <ItemGroup>
     <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
@@ -28,5 +31,8 @@
 
   <ItemGroup>
     <Folder Include="Client\" />
+    <Folder Include="Models\Hero\" />
+    <Folder Include="Models\HeroComics\" />
+    <Folder Include="Views\Character\" />
   </ItemGroup>
 </Project>

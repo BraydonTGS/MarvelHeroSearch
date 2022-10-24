@@ -1,11 +1,15 @@
 ﻿using System;
+using MarvelHeroSearch.Models.Hero;
+
 namespace MarvelHeroSearch.Client
 {
-    public class IMarvelApiClient
+    public interface IMarvelApiClient
     {
-        public IMarvelApiClient()
-        {
-        }
+        public CharacterDataWrapper GetCharacter(string characterName);
+
+        public CharacterDataWrapper GetListOfCharacters();
+
+        //public ComicDataWrapper GetCharacterComics(string url);
     }
 }
 

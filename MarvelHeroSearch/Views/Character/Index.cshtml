@@ -1,0 +1,18 @@
+﻿@using MarvelHeroSearch.Models.Hero
+@model CharacterDataWrapper
+<!--Custom CSS-->
+<style>
+    form {
+        background-color: #FDF5E6;
+    }
+</style>
+
+
+
+<form asp-controller="Character" asp-action="CharacterSearch" class="border border-dark border-3 m-3 p-3 shadow-lg">
+    <div>
+        <label for="exampleInputEmail1" class="form-label mt-4">Super Hero Name</label>
+        <input class="form-control" name="searchString" placeholder="Enter Name Here" required />
+        <button class="btn btn-warning mt-3" id="submit" name="submit" type="submit" style="font-weight:bold;" value="Search">Search</button>
+    </div>
+</form>
