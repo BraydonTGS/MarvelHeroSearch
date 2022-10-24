@@ -6,7 +6,6 @@ namespace MarvelHeroSearch.Models.HeroComics
         public int id { get; set; }
         public int digitalId { get; set; }
         public string title { get; set; }
-        public int issueNumber { get; set; }
         public string variantDescription { get; set; }
         public string description { get; set; }
         public string isbn { get; set; }

@@ -39,11 +39,16 @@
                 <div class="d-flex align-items-center">
                     <img src="@character.GetImage()" class="border border-3 border-dark rounded shadow-lg" alt="..." />
                     <div class="button-container d-flex flex-column justify-content-center align-items-center">
-                        <div class="button-bnt"><a type="button" class="btn btn-lg btn-dark m-2" href="@character.urls[0].url" target="blank">More Information</a></div>
+                        <form asp-controller="Character" asp-action="CharacterSearch">
+                            <div>
+                                <button class="btn btn-lg btn-dark m-2" id="submit" name="searchString" type="submit" style="font-weight:bold;" value="@character.name">More Information</button>
+                            </div>
+                        </form>
                         <div class="button-bnt"><button type="button" class="btn btn-lg btn-success m-2">Add to Favorites</button></div>
+
                     </div>
                 </div>
-                <div class="mt-1"><p>"Data provided by Marvel. © 2014 Marvel"</p></div>
+                <div class="mt-1 credits"><p>"Data provided by Marvel. © 2014 Marvel"</p></div>
             </div>
         </div>
     }

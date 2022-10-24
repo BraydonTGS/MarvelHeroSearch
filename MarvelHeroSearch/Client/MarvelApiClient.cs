@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 
 namespace MarvelHeroSearch.Client
 {
+    // ToDo Set up Exception Handling For my Api Calls - Morbius //
     public class MarvelApiClient : IMarvelApiClient
     {
         private const int _maxCharacters = 1562;

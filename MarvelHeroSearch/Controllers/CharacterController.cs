@@ -61,9 +61,8 @@ namespace MarvelHeroSearch.Controllers
             }
             if (character.description == "")
             {
-                character.description = "IF YOU’RE NOTHING WITHOUT THIS SUIT, THEN YOU SHOULDN’T HAVE IT.";
+                character.description = "Wounded, captured and forced to build a weapon by his enemies, billionaire industrialist Tony Stark instead created an advanced suit of armor to save his life and escape captivity. Now with a new outlook on life, Tony uses his money and intelligence to make the world a safer, better place as Iron Man.";
             }
-
 
             return View(root);
         }
@@ -98,6 +97,14 @@ namespace MarvelHeroSearch.Controllers
         {
             return View();
         }
+
+
+        // Get List of Favorite Characters //
+        public IActionResult Favorites()
+        {
+            return View();
+        }
+
     }
 }
 

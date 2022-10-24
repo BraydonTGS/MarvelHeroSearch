@@ -18,9 +18,20 @@
         border-radius: 11px;
     }
 
+    .comic-list-container {
+        height: auto;
+        width: 700px;
+        background-color: #FDF5E6;
+        border-radius: 11px;
+    }
+
+    .comic-img-card {
+        background-color: #FDF5E6
+    }
+
     .comic-list {
-        font-weight: bold;
-        font-size: 18px;
+        font-size: 17px;
+        margin-left: 10px;
     }
 
     form {
@@ -33,8 +44,14 @@
     }
 
     .description {
+        margin-top: 50px;
+        margin-bottom: 50px;
         margin-left: 15px;
         margin-right: 15px;
+    }
+
+    .credits {
+        padding-left: 10px;
     }
 </style>
 
@@ -47,58 +64,82 @@
     </div>
 </form>
 
-<!--Character Result Container-->
-<div class="d-flex flex-wrap justify-content-around align-content-center">
-    <div class="card-container border border-dark border-3 m-5 shadow-lg">
-        <div class="card-header p-1">Character Id: @Model.data.results[0].id</div>
-        <div class="card-body">
-            <div class="d-flex align-items-center mt-2">
-                <h1 class="name card-title text-danger">Name: <span class="text-dark">@char.ToUpper(Model.data.results[0].name[0])@Model.data.results[0].name.Substring(1)</span></h1>
+
+<div class=" d-flex flex-wrap justify-content-around align-content-around">
+
+    <!--Character Result Container-->
+    <div class="d-flex align-content-center">
+        <div class="card-container border border-dark border-3 m-3 shadow-lg">
+            <div class="card-header p-1">Character Id: @Model.data.results[0].id</div>
+            <div class="card-body">
+                <div class="d-flex align-items-center mt-2">
+                    <h1 class="name card-title text-danger">Name: <span class="text-dark">@char.ToUpper(Model.data.results[0].name[0])@Model.data.results[0].name.Substring(1)</span></h1>
+                </div>
+                <hr class="mt-1" />
+                <div class="d-flex align-items-center justify-content-around">
+                    <img src="@Model.data.results[0].GetImageLarge()" class="character-img border border-3 border-dark rounded shadow m-1" alt="..." />
+                </div>
+                <hr />
+                <div class="description d-flex align-items-center justify-content-between">
+                    <!--Description-->
+                    <h5 class="text-danger">
+                        Description: <span class="text-dark">@Model.data.results[0].description</span>
+                    </h5>
+                </div>
+
+                <div class="d-flex justify-content-around align-items">
+                    <div class="button-bnt"><a type="button" class="btn btn-lg btn-dark m-2 shadow" href="@Model.data.results[0].urls[0].url" target="blank">More Information</a></div>
+                    <div class="button-bnt"><a type="button" class="btn btn-lg btn-warning m-2 shadow" href="@Model.data.results[0].urls[2].url" target="blank">View Comics</a></div>
+                    <div class="button-btn"><button type="button" class="btn btn-lg btn-success m-2 shadow">Add to Favorites</button></div>
+                </div>
+                <hr />
+                <div class="mt-1 credits"><p>"Data provided by Marvel. © 2014 Marvel"</p></div>
             </div>
-            <hr class="mt-1" />
-            <div class="d-flex align-items-center justify-content-around">
-                <img src="@Model.data.results[0].GetImageLarge()" class="character-img border border-3 border-dark rounded shadow m-1" alt="..." />
+        </div>
+    </div>
+
+    <!--Comic List Container-->
+    <div class="d-flex align-content-center">
+        <div class="comic-list-container border border-dark border-3 m-3 shadow-lg">
+            <div class="card-header p-1">Character Id: @Model.data.results[0].id</div>
+            <div class="card-body">
+                <div class="d-flex align-items-center mt-2">
+                    <h1 class="name card-title text-danger">Comics: <span class="text-dark">@Model.data.results[0].comics.available</span></h1>
+                </div>
+                <hr class="mt-1" />
+                <div class="d-flex flex-column justify-content-end align-items-start">
+
+                    @foreach (var comic in Model.data.results[0].ComicBooks)
+                    {
+                        <p class="comic-list text-danger">
+                            > Title: <span class="text-dark"> @comic.title;</span>
+                        </p>
+                    }
+                </div>
+
             </div>
             <hr />
-            <div class="description d-flex align-items-center justify-content-between">
-                <!--Description-->
-                <h5 class="text-danger">
-                    Description: <span class="text-dark">@Model.data.results[0].description</span>
-                </h5>
-            </div>
-            <div class="d-flex justify-content-around align-items mt-2 pb-2">
-                <div class="button-bnt"><a type="button" class="btn btn-lg btn-dark m-2" href="@Model.data.results[0].urls[0].url" target="blank">More Information</a></div>
-                <div class="button-bnt"><a type="button" class="btn btn-lg btn-warning m-2" href="@Model.data.results[0].urls[2].url" target="blank">View Comics</a></div>
-                <div class="button-btn"><button type="button" class="btn btn-lg btn-success m-2">Add to Favorites</button></div>
-            </div>
-            <div class="mt-1"><p>"Data provided by Marvel. © 2014 Marvel"</p></div>
+            <div class="mt-3 credits"><p>"Data provided by Marvel. © 2014 Marvel"</p></div>
         </div>
     </div>
 </div>
 
-@*<div class="d-flex flex-column justify-content-center align-items-center">
-        <h1 class="comics card-title text-danger">Comics</h1>
-        @foreach (var item in Model.data.results[0].comics.items.Take(7))
-        {
-            <p class="comic-list">@item.name;</p>
-        }
-    </div>*@
 
 <!--Comic Results Container-->
-<section id="#comics">
-    <div class="d-flex flex-wrap justify-content-around align-content-around ">
+<div class="d-flex flex-wrap justify-content-around align-content-around">
 
-        @foreach (var comic in Model.data.results[0].ComicBooks)
-        {
-            <div class="card border-dark m-3 shadow-lg">
-                <div class="comic-container card-header">Number: @comic.id</div>
-                <div class="card-body">
-                    <div class="d-flex align-items-center justify-content-center">
-                        <img src="@comic.GetImage()" class="comic-image border border-3 border-dark rounded shadow-lg" alt="..." />
-                    </div>
-                    <div class="mt-1"><p>"Data provided by Marvel. © 2014 Marvel"</p></div>
+    @foreach (var comic in Model.data.results[0].ComicBooks)
+    {
+        <div class="comic-img-card card border-dark m-3 shadow-lg">
+            <div class="comic-container card-header">Digital Id: @comic.id</div>
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-center">
+                    <img src="@comic.GetImage()" class="comic-image border border-3 border-dark rounded shadow-lg" alt="..." />
                 </div>
+
+                <div class="mt-2"><p>"Data provided by Marvel. © 2014 Marvel"</p></div>
             </div>
-        }
-    </div>
-</section>
+        </div>
+    }
+</div>
+

@@ -9,6 +9,10 @@
         body {
             background: url("https://wallpapercave.com/wp/wp2766862.jpg");
         }
+
+        .main {
+            padding-top: 75px;
+        }
     </style>
     <!--Favicon-->
     <link rel="shortcut icon" type="image/x-icon" href="~/favicon.png" />
@@ -19,9 +23,9 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark box-shadow mb-3 fixed-top">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Marvel SuperShelfie</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Marvel Hero Search</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -33,7 +37,7 @@
                             <a class="nav-link" asp-area="" asp-controller="Character" asp-action="Index">Search</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Character" asp-action="CharacterFavorites">Favorites</a>
+                            <a class="nav-link" asp-area="" asp-controller="Character" asp-action="Favorites">Favorites</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Character" asp-action="CharacterList">Surprise Me</a>
@@ -52,7 +56,7 @@
     </header>
     <div class="container">
         <!--Where The Body is Rendered-->
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3 main">
             @RenderBody()
         </main>
     </div>
