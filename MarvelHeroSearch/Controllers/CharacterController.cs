@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MarvelHeroSearch.Client;
+using MarvelHeroSearch.Models.Hero;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -25,6 +26,7 @@ namespace MarvelHeroSearch.Controllers
             return View();
         }
 
+        // Searching for a Character by Name //
         public IActionResult CharacterSearch()
         {
             var searchString = Request.Form["searchString"];
@@ -41,7 +43,12 @@ namespace MarvelHeroSearch.Controllers
             }
             var character = root.data.results[0];
 
-            //var myComics = _response.GetCharacterComics(character.comics.collectionURI);
+            var myComics = _response.GetCharacterComics(character.comics.collectionURI);
+
+            foreach (var comic in myComics.data.results)
+            {
+                character.ComicBooks.Add(comic);
+            }
 
             // Character Name Length Shortened to Fit the Card //
             if (character.name.Length > 15)
@@ -68,7 +75,7 @@ namespace MarvelHeroSearch.Controllers
             var characters = root.data.results;
 
             // List For the Parsed Results //
-            List<Models.Hero.Character> parsedCharacters = new List<Models.Hero.Character>();
+            List<Character> parsedCharacters = new List<Character>();
 
             foreach (var character in characters)
             {

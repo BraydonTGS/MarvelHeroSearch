@@ -1,4 +1,6 @@
 ﻿using System;
+using MarvelHeroSearch.Models.HeroComics;
+
 namespace MarvelHeroSearch.Models.Hero
 {
 
@@ -14,6 +16,7 @@ namespace MarvelHeroSearch.Models.Hero
         public StoryList stories { get; set; }
         public EventList events { get; set; }
         public List<CharacterUrl> urls { get; set; }
+        public List<ComicBook> ComicBooks { get; set; } = new List<ComicBook>();
 
 
         public string GetImageLarge()

@@ -7,9 +7,13 @@
         background-color: #F5DEB3
     }
 
+    .name {
+        margin-left: 10px;
+    }
+
     .card-container {
         height: auto;
-        width: 900px;
+        width: 700px;
         background-color: #FDF5E6;
         border-radius: 11px;
     }
@@ -23,9 +27,14 @@
         background-color: #FDF5E6;
     }
 
-    img {
+    character-img {
         height: 550px;
         width: 550px;
+    }
+
+    .description {
+        margin-left: 15px;
+        margin-right: 15px;
     }
 </style>
 
@@ -43,23 +52,17 @@
     <div class="card-container border border-dark border-3 m-5 shadow-lg">
         <div class="card-header p-1">Character Id: @Model.data.results[0].id</div>
         <div class="card-body">
-            <div class="d-flex align-items-center justify-content-center mt-2">
+            <div class="d-flex align-items-center mt-2">
                 <h1 class="name card-title text-danger">Name: <span class="text-dark">@char.ToUpper(Model.data.results[0].name[0])@Model.data.results[0].name.Substring(1)</span></h1>
             </div>
             <hr class="mt-1" />
             <div class="d-flex align-items-center justify-content-around">
-                <img src="@Model.data.results[0].GetImageLarge()" class="border border-3 border-dark rounded shadow m-1" alt="..." />
-                <div class="d-flex flex-column justify-content-center align-items-center">
-                    <h1 class="comics card-title text-danger">Comics</h1>
-                    @foreach (var item in Model.data.results[0].comics.items.Take(7))
-                    {
-                        <p class="comic-list">@item.name;</p>
-                    }
-                </div>
+                <img src="@Model.data.results[0].GetImageLarge()" class="character-img border border-3 border-dark rounded shadow m-1" alt="..." />
             </div>
             <hr />
-            <div class="d-flex align-items-center justify-content-between">
-                <h5 class="description text-danger m-1">
+            <div class="description d-flex align-items-center justify-content-between">
+                <!--Description-->
+                <h5 class="text-danger">
                     Description: <span class="text-dark">@Model.data.results[0].description</span>
                 </h5>
             </div>
@@ -71,5 +74,31 @@
             <div class="mt-1"><p>"Data provided by Marvel. © 2014 Marvel"</p></div>
         </div>
     </div>
-
 </div>
+
+@*<div class="d-flex flex-column justify-content-center align-items-center">
+        <h1 class="comics card-title text-danger">Comics</h1>
+        @foreach (var item in Model.data.results[0].comics.items.Take(7))
+        {
+            <p class="comic-list">@item.name;</p>
+        }
+    </div>*@
+
+<!--Comic Results Container-->
+<section id="#comics">
+    <div class="d-flex flex-wrap justify-content-around align-content-around ">
+
+        @foreach (var comic in Model.data.results[0].ComicBooks)
+        {
+            <div class="card border-dark m-3 shadow-lg">
+                <div class="comic-container card-header">Number: @comic.id</div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <img src="@comic.GetImage()" class="comic-image border border-3 border-dark rounded shadow-lg" alt="..." />
+                    </div>
+                    <div class="mt-1"><p>"Data provided by Marvel. © 2014 Marvel"</p></div>
+                </div>
+            </div>
+        }
+    </div>
+</section>

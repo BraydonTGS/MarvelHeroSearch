@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text.Json;
 using MarvelHeroSearch.Models.Hero;
+using MarvelHeroSearch.Models.HeroComics;
 using Newtonsoft.Json.Linq;
 
 namespace MarvelHeroSearch.Client
@@ -50,6 +51,20 @@ namespace MarvelHeroSearch.Client
             // Response -> String -> JSON -> Deserialize //
             var repo = client.GetStringAsync(url).Result;
             var response = JsonSerializer.Deserialize<CharacterDataWrapper>(repo);
+
+            return response;
+        }
+
+        // Get Comics For a Character by ID //
+        public ComicDataWrapper GetCharacterComics(string characterId)
+        {
+
+            // Assemble The URL //
+            string url = $"{characterId}?ts=1&limit=20&apikey={_publicKey}&hash={_md5Hash}";
+
+            // Response -> String -> JSON -> Deserialize //
+            var repo = client.GetStringAsync(url).Result;
+            var response = JsonSerializer.Deserialize<ComicDataWrapper>(repo);
 
             return response;
         }

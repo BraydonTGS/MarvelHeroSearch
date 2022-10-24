@@ -1,5 +1,6 @@
 ﻿using System;
 using MarvelHeroSearch.Models.Hero;
+using MarvelHeroSearch.Models.HeroComics;
 
 namespace MarvelHeroSearch.Client
 {
@@ -9,7 +10,7 @@ namespace MarvelHeroSearch.Client
 
         public CharacterDataWrapper GetListOfCharacters();
 
-        //public ComicDataWrapper GetCharacterComics(string url);
+        public ComicDataWrapper GetCharacterComics(string id);
     }
 }
 
