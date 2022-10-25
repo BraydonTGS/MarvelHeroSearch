@@ -23,8 +23,8 @@ namespace MarvelHeroSearch.Models.DbModels
         // Add a Character //
         public void InsertHero(CharacterDb character)
         {
-            _connection.Execute("INSERT INTO Heroes (CharacterId, CharacterName, CharacterImage) VALUES (@id, @name, @image);",
-                 new { id = character.CharacterId, name = character.CharacterName, image = character.thumbnail });
+            _connection.Execute("INSERT INTO Heroes (CharacterId, CharacterName) VALUES (@id, @name);",
+                 new { id = character.CharacterId, name = character.CharacterName });
         }
 
 

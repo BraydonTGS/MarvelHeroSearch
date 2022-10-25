@@ -137,7 +137,7 @@ namespace MarvelHeroSearch.Controllers
             // Calling the API for each Character based on Character Id //
             foreach (var hero in favorites)
             {
-                var character = _response.GetCharacterById(hero.CharacterId.ToString());
+                var character = _response.GetCharacterById(hero.CharacterId);
                 var favoriteCharacter = character.data.results[0];
                 _favoriteCharacters.Add(favoriteCharacter);
             }
@@ -146,10 +146,32 @@ namespace MarvelHeroSearch.Controllers
         }
 
         // Add to your Favorite Characters //
-        public IActionResult AddToFavorites(Character character)
+        public IActionResult AddToFavorites()
         {
-            _favoriteCharacters.Add(character);
-            return View();
+            var characterId = Request.Form["searchString"];
+
+            if (string.IsNullOrWhiteSpace(characterId))
+            {
+                return View("CharacterNotFound");
+            }
+
+            var root = _response.GetCharacterById(characterId);
+
+            if (!root.data.results.Any())
+            {
+                return View("CharacterNotFound");
+
+            }
+            var character = root.data.results[0];
+
+            var favCharacter = new CharacterDb();
+            favCharacter.CharacterName = character.name;
+            favCharacter.CharacterId = character.id.ToString();
+
+            _heroResponse.InsertHero(favCharacter);
+
+            // find a way not change my view //
+            return RedirectToAction("Index");
         }
 
         // Get a List of Comics for Each Character by Character Name //
