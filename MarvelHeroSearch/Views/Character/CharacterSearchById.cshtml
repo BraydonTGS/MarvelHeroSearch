@@ -94,7 +94,11 @@
                             <button class="btn btn-lg btn-warning m-2 shadow" id="submit" name="searchString" type="submit" style="font-weight:bold;" value="@Model.data.results[0].id">View Comics</button>
                         </div>
                     </form>
-                    <div class="button-btn"><button type="button" class="btn btn-lg btn-success m-2 shadow">Add to Favorites</button></div>
+                    <form asp-controller="Character" asp-action="AddToFavorites">
+                        <div>
+                            <button class="btn btn-lg btn-success m-2 shadow" id="submit" name="searchString" type="submit" style="font-weight:bold;" value="@Model.data.results[0].id">Add To Favorites</button>
+                        </div>
+                    </form>
                 </div>
                 <hr />
                 <div class="mt-1 credits"><p>"Data provided by Marvel. © 2014 Marvel"</p></div>

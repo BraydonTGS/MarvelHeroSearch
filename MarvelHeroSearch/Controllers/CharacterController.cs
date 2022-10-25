@@ -18,6 +18,8 @@ namespace MarvelHeroSearch.Controllers
 
         private readonly IHeroRepository _heroResponse;
 
+        private List<Character> _favoriteCharacters { get; set; } = new List<Character>();
+
         public CharacterController(IMarvelApiClient response, IHeroRepository hResponse)
         {
             _response = response;
@@ -128,14 +130,27 @@ namespace MarvelHeroSearch.Controllers
             return View(parsedCharacters);
         }
 
-
         // Get List of Favorite Characters //
         public IActionResult Favorites()
         {
             var favorites = _heroResponse.GetAllHeroes();
-            return View(favorites);
+            // Calling the API for each Character based on Character Id //
+            foreach (var hero in favorites)
+            {
+                var character = _response.GetCharacterById(hero.CharacterId.ToString());
+                var favoriteCharacter = character.data.results[0];
+                _favoriteCharacters.Add(favoriteCharacter);
+            }
+
+            return View(_favoriteCharacters);
         }
 
+        // Add to your Favorite Characters //
+        public IActionResult AddToFavorites(Character character)
+        {
+            _favoriteCharacters.Add(character);
+            return View();
+        }
 
         // Get a List of Comics for Each Character by Character Name //
         public IActionResult GetComicsByHeroName()
