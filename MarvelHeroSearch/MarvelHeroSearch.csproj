@@ -16,6 +16,7 @@
     <None Remove="Views\Character\" />
     <None Remove="MySql.Data" />
     <None Remove="Dapper" />
+    <None Remove="Models\DbModels\" />
   </ItemGroup>
   <ItemGroup>
     <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
@@ -38,5 +39,6 @@
     <Folder Include="Models\Hero\" />
     <Folder Include="Models\HeroComics\" />
     <Folder Include="Views\Character\" />
+    <Folder Include="Models\DbModels\" />
   </ItemGroup>
 </Project>
