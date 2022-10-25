@@ -1,4 +1,7 @@
-﻿<style>
+﻿@using MarvelHeroSearch.Models.DbModels;
+@model IEnumerable<CharacterDb>
+
+<style>
 
     .header {
         text-align: center;
@@ -15,3 +18,11 @@
         <a href="/Character/Index" class="btn btn-dark shadow">Go Back</a>
     </div>
 </div>
+
+@foreach (var hero in Model)
+{
+    <div class="bg bg-danger">
+        <p>@hero.CharacterName</p>
+    </div>
+}
+

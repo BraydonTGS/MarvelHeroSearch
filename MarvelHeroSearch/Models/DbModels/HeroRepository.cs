@@ -15,12 +15,17 @@ namespace MarvelHeroSearch.Models.DbModels
         }
 
         // Gets All Products: Using Dapper: From the BB DB, Returns a Collection of Ienumerable<Products> //
-        public IEnumerable<CharacterDb> GetAllProducts()
+        public IEnumerable<CharacterDb> GetAllHeroes()
         {
             return _connection.Query<CharacterDb>("SELECT * FROM Heroes h ORDER BY h.HeroDbId DESC;");
         }
 
         // Add a Character //
+        public void InsertHero(CharacterDb character)
+        {
+            _connection.Execute("INSERT INTO Heroes (CharacterId, CharacterName, CharacterImage) VALUES (@id, @name, @image);",
+                 new { id = character.CharacterId, name = character.CharacterName, image = character.thumbnail });
+        }
 
 
 

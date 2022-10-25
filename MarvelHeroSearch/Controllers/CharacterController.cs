@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MarvelHeroSearch.Client;
+using MarvelHeroSearch.Models.DbModels;
 using MarvelHeroSearch.Models.Hero;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,9 +16,12 @@ namespace MarvelHeroSearch.Controllers
 
         private readonly IMarvelApiClient _response;
 
-        public CharacterController(IMarvelApiClient response)
+        private readonly IHeroRepository _heroResponse;
+
+        public CharacterController(IMarvelApiClient response, IHeroRepository hResponse)
         {
             _response = response;
+            _heroResponse = hResponse;
         }
 
         // Home Page Character Controller //
@@ -128,7 +132,8 @@ namespace MarvelHeroSearch.Controllers
         // Get List of Favorite Characters //
         public IActionResult Favorites()
         {
-            return View();
+            var favorites = _heroResponse.GetAllHeroes();
+            return View(favorites);
         }
 
 
