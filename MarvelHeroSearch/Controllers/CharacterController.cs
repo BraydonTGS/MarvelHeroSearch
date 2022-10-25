@@ -118,10 +118,32 @@ namespace MarvelHeroSearch.Controllers
             return View(parsedCharacters);
         }
 
-        // Get a List of Comics for Each Character by ID //
-        public IActionResult GetComics()
+        // Get a List of Comics for Each Character by Character Name //
+        public IActionResult GetComicsByHeroName()
         {
-            return View();
+            var searchString = Request.Form["searchString"];
+            if (string.IsNullOrWhiteSpace(searchString))
+            {
+                return View("CharacterNotFound");
+            }
+            var root = _response.GetCharacter(searchString);
+
+            if (!root.data.results.Any())
+            {
+                return View("CharacterNotFound");
+
+            }
+
+            var character = root.data.results[0];
+
+            var myComics = _response.GetCharacterComics(character.comics.collectionURI);
+
+            foreach (var comic in myComics.data.results)
+            {
+                character.ComicBooks.Add(comic);
+            }
+
+            return View(root);
         }
 
 
