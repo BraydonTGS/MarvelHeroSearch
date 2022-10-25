@@ -2,6 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using MarvelHeroSearch.Data;
 using MarvelHeroSearch.Client;
+using MySql.Data.MySqlClient;
+using System.Data;
+using MarvelHeroSearch.Models.DbModels;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +17,21 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+// DB Connection //
+
+var connection = builder.Configuration.GetConnectionString("MarvelHeroes");
+// During the scope of my request // 
+builder.Services.AddScoped<IDbConnection>((s) =>
+{
+    IDbConnection conn = new MySqlConnection(connection);
+    // Open before you can send a request to the DB //
+    conn.Open();
+    return conn;
+});
+
+// Adding Dependency Injection for my DB //
+builder.Services.AddTransient<IHeroRepository, HeroRepository>();
 
 //Add to your Program.cs Before .Build() to enable Hot Reload //
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
