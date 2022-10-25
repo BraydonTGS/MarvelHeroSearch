@@ -18,13 +18,6 @@
         border-radius: 11px;
     }
 
-    .comic-list-container {
-        height: auto;
-        width: 650px;
-        background-color: #FDF5E6;
-        border-radius: 11px;
-    }
-
     .comic-img-card {
         background-color: #FDF5E6
     }
@@ -89,7 +82,7 @@
 
                 <div class="d-flex justify-content-around align-items">
                     <div class="button-bnt"><a type="button" class="btn btn-lg btn-dark m-2 shadow" href="@Model.data.results[0].urls[0].url" target="blank">More Information</a></div>
-                    <form asp-controller="Character" asp-action="GetComics">
+                    <form asp-controller="Character" asp-action="GetComicsByHeroId">
                         <div>
                             <button class="btn btn-lg btn-warning m-2 shadow" id="submit" name="searchString" type="submit" style="font-weight:bold;" value="@Model.data.results[0].id">View Comics</button>
                         </div>
@@ -118,31 +111,6 @@
                 </div>
             </div>
         }
-    </div>
-
-    <!--Comic List Container-->
-    <div class="d-flex align-content-center">
-        <div class="comic-list-container border border-dark border-3 m-3 shadow-lg">
-            <div class="card-header p-1">Character Id: @Model.data.results[0].id</div>
-            <div class="card-body">
-                <div class="d-flex align-items-center mt-2">
-                    <h1 class="name card-title text-danger">Comics: <span class="text-dark">@Model.data.results[0].comics.available</span></h1>
-                </div>
-                <hr class="mt-1" />
-                <div class="d-flex flex-column justify-content-end align-items-start">
-
-                    @foreach (var comic in Model.data.results[0].ComicBooks)
-                    {
-                        <p class="comic-list text-danger">
-                            > Title: <span class="text-dark"> @comic.title;</span>
-                        </p>
-                    }
-                </div>
-
-            </div>
-            <hr />
-            <div class="mt-3 credits"><p>"Data provided by Marvel. © 2014 Marvel"</p></div>
-        </div>
     </div>
 </div>
 

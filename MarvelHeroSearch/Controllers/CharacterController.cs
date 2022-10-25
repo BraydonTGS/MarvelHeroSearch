@@ -48,7 +48,10 @@ namespace MarvelHeroSearch.Controllers
 
             foreach (var comic in myComics.data.results)
             {
-                character.ComicBooks.Add(comic);
+                if (comic.thumbnail != null && comic.thumbnail.IsImageFound)
+                {
+                    character.ComicBooks.Add(comic);
+                }
             }
 
             if (character.description == "")
@@ -80,10 +83,13 @@ namespace MarvelHeroSearch.Controllers
 
             foreach (var comic in myComics.data.results)
             {
-                character.ComicBooks.Add(comic);
+                if (comic.thumbnail != null && comic.thumbnail.IsImageFound)
+                {
+                    character.ComicBooks.Add(comic);
+                }
             }
 
-            if (character.description == "")
+            if (string.IsNullOrWhiteSpace(character.description))
             {
                 character.description = "If You're Nothing Without The Suit, Then You Shouldn't Have It.";
             }
@@ -118,34 +124,87 @@ namespace MarvelHeroSearch.Controllers
             return View(parsedCharacters);
         }
 
+
+        // Get List of Favorite Characters //
+        public IActionResult Favorites()
+        {
+            return View();
+        }
+
+
         // Get a List of Comics for Each Character by Character Name //
         public IActionResult GetComicsByHeroName()
         {
-            var searchString = Request.Form["searchString"];
-            if (string.IsNullOrWhiteSpace(searchString))
+            var characterId = Request.Form["searchString"];
+            if (string.IsNullOrWhiteSpace(characterId))
             {
                 return View("CharacterNotFound");
             }
-            var root = _response.GetCharacter(searchString);
+            var root = _response.GetCharacter(characterId);
 
             if (!root.data.results.Any())
             {
                 return View("CharacterNotFound");
 
             }
-
             var character = root.data.results[0];
 
             var myComics = _response.GetCharacterComics(character.comics.collectionURI);
 
             foreach (var comic in myComics.data.results)
             {
-                character.ComicBooks.Add(comic);
-            }
+                if (comic.thumbnail != null && comic.thumbnail.IsImageFound)
+                {
+                    if (string.IsNullOrWhiteSpace(comic.description))
+                    {
+                        comic.description = "No Detailed Comic Information Found.";
+                    }
+                    character.ComicBooks.Add(comic);
+                }
 
+            }
             return View(root);
         }
 
+        // Get a List of Comics for Each Character by Character ID //
+        public IActionResult GetComicsbyHeroId()
+        {
+            var characterId = Request.Form["searchString"];
+            if (string.IsNullOrWhiteSpace(characterId))
+            {
+                return View("CharacterNotFound");
+            }
+            var root = _response.GetCharacterById(characterId);
+
+            if (!root.data.results.Any())
+            {
+                return View("CharacterNotFound");
+
+            }
+            var character = root.data.results[0];
+
+            var myComics = _response.GetCharacterComics(character.comics.collectionURI);
+
+            foreach (var comic in myComics.data.results)
+            {
+                if (comic.thumbnail != null && comic.thumbnail.IsImageFound)
+                {
+                    if (string.IsNullOrWhiteSpace(comic.description))
+                    {
+                        comic.description = "No Detailed Comic Information Found";
+                    }
+                    character.ComicBooks.Add(comic);
+                }
+
+            }
+            return View(root);
+        }
+
+        // Comic Home Page //
+        public IActionResult GetComics()
+        {
+            return View();
+        }
 
         // Character Not Found //
         public IActionResult CharacterNotFound()
@@ -154,11 +213,7 @@ namespace MarvelHeroSearch.Controllers
         }
 
 
-        // Get List of Favorite Characters //
-        public IActionResult Favorites()
-        {
-            return View();
-        }
+
 
     }
 }
