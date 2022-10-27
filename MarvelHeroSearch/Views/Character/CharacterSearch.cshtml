@@ -98,24 +98,6 @@
             </div>
         </div>
     </div>
-
-    <!--Comic Results Container-->
-    <div class="d-flex flex-wrap justify-content-around align-content-around">
-
-        @foreach (var comic in Model.data.results[0].ComicBooks)
-        {
-            <div class="comic-img-card card border-dark m-3 shadow-lg">
-                <div class="comic-container card-header">Digital Id: @comic.id</div>
-                <div class="card-body">
-                    <div class="d-flex align-items-center justify-content-center">
-                        <img src="@comic.GetImage()" class="comic-image border border-3 border-dark rounded shadow-lg" alt="..." />
-                    </div>
-
-                    <div class="mt-2"><p>"Data provided by Marvel. © 2014 Marvel"</p></div>
-                </div>
-            </div>
-        }
-    </div>
 </div>
 
 

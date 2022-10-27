@@ -45,7 +45,6 @@ namespace MarvelHeroSearch.Client
         // Get Character by Id //
         public CharacterDataWrapper GetCharacterById(string id)
         {
-
             // Assemble The URL //
             string url = $"https://gateway.marvel.com/v1/public/characters/{id}?&ts=1&apikey={_publicKey}&hash={_md5Hash}";
 
@@ -76,7 +75,6 @@ namespace MarvelHeroSearch.Client
         // Get Comics For a Character by ID //
         public ComicDataWrapper GetCharacterComics(string characterId)
         {
-
             // Assemble The URL //
             string url = $"{characterId}?ts=1&limit=20&apikey={_publicKey}&hash={_md5Hash}";
 

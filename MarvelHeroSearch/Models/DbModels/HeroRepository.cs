@@ -28,6 +28,7 @@ namespace MarvelHeroSearch.Models.DbModels
         }
 
 
+        //todo: Delete Character from Favorites // 
 
     }
 }
