@@ -28,7 +28,12 @@ namespace MarvelHeroSearch.Models.DbModels
         }
 
 
-        //todo: Delete Character from Favorites // 
+        // Delete a Character //
+
+        public void DeleteHero(CharacterDb character)
+        {
+            _connection.Execute("DELETE FROM Heroes WHERE CharacterId = @id", new { id = character.CharacterId });
+        }
 
     }
 }
