@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using Dapper;
+using MarvelHeroSearch.Models.Hero;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace MarvelHeroSearch.Models.DbModels
@@ -29,10 +30,9 @@ namespace MarvelHeroSearch.Models.DbModels
 
 
         // Delete a Character //
-
-        public void DeleteHero(CharacterDb character)
+        public void DeleteHero(Character character)
         {
-            _connection.Execute("DELETE FROM Heroes WHERE CharacterId = @id", new { id = character.CharacterId });
+            _connection.Execute("DELETE FROM Heroes WHERE CharacterId = @id", new { id = character.id });
         }
 
     }

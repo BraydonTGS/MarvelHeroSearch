@@ -169,9 +169,14 @@ namespace MarvelHeroSearch.Controllers
             favCharacter.CharacterId = character.id.ToString();
 
             _heroResponse.InsertHero(favCharacter);
+            return RedirectToAction("Favorites");
+        }
 
-            // find a way not change my view //
-            return RedirectToAction("Index");
+        public IActionResult DeleteHero(Character character)
+        {
+            _heroResponse.DeleteHero(character);
+            return RedirectToAction("Favorites");
+
         }
 
         // Get a List of Comics for Each Character by Character Name //

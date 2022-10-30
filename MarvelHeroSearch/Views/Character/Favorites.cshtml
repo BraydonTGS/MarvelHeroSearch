@@ -46,8 +46,16 @@
                         </form>
                         <form asp-controller="Character" asp-action="GetComicsByHeroId">
                             <div>
-                                <button class="btn btn-lg btn-danger m-2 shadow" id="submit" name="searchString" type="submit" style="font-weight:bold;" value="@character.id">Delete Character</button>
+                                <button class="btn btn-lg btn-warning m-2 shadow" id="submit" name="searchString" type="submit" style="font-weight:bold;" value="@character.id">View Comics</button>
                             </div>
+                        </form>
+                        <form>
+
+                            @using (Html.BeginForm("DeleteHero", "Character", "Post"))
+                            {
+                                <input type="hidden" asp-for="@character.id" value="@character.id" />
+                                <input type="submit" class="btn btn-lg btn-danger m-2 shadow" onclick="return confirm('Are you sure you want to delete this Hero?')" value="Delete" />
+                            }
                         </form>
 
                     </div>
