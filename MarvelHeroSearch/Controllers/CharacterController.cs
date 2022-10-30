@@ -134,6 +134,10 @@ namespace MarvelHeroSearch.Controllers
         public IActionResult Favorites()
         {
             var favorites = _heroResponse.GetAllHeroes();
+            if (!favorites.Any())
+            {
+                return View("CharacterFavoritesEmpty");
+            }
             // Calling the API for each Character based on Character Id //
             foreach (var hero in favorites)
             {

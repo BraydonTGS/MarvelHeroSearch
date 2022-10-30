@@ -39,24 +39,24 @@
                 <div class="d-flex align-items-center">
                     <img src="@character.GetImage()" class="border border-3 border-dark rounded shadow-lg" alt="..." />
                     <div class="button-container d-flex flex-column justify-content-center align-items-center">
-                        <form asp-controller="Character" asp-action="CharacterSearchById">
-                            <div>
-                                <button class="btn btn-lg btn-dark m-2 shadow" id="submit" name="searchString" type="submit" style="font-weight:bold;" value="@character.id">More Information</button>
-                            </div>
-                        </form>
                         <form asp-controller="Character" asp-action="GetComicsByHeroId">
                             <div>
                                 <button class="btn btn-lg btn-warning m-2 shadow" id="submit" name="searchString" type="submit" style="font-weight:bold;" value="@character.id">View Comics</button>
                             </div>
                         </form>
-                        <form>
+                        <form asp-controller="Character" asp-action="CharacterSearchById">
+                            <div>
+                                <button class="btn btn-lg btn-dark m-2 shadow" id="submit" name="searchString" type="submit" style="font-weight:bold;" value="@character.id">More Information</button>
+                            </div>
+                        </form>
+                        <div>
 
                             @using (Html.BeginForm("DeleteHero", "Character", "Post"))
                             {
                                 <input type="hidden" asp-for="@character.id" value="@character.id" />
-                                <input type="submit" class="btn btn-lg btn-danger m-2 shadow" onclick="return confirm('Are you sure you want to delete this Hero?')" value="Delete" />
+                                <input type="submit" class="btn btn-lg btn-danger m-2 shadow" onclick="return confirm('Are you sure you want to delete this Hero?')" value="Delete Hero" />
                             }
-                        </form>
+                        </div>
 
                     </div>
                 </div>
