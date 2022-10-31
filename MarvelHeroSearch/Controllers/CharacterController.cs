@@ -190,6 +190,7 @@ namespace MarvelHeroSearch.Controllers
         public IActionResult GetComicsByHeroName()
         {
             var characterId = Request.Form["searchString"];
+
             if (string.IsNullOrWhiteSpace(characterId))
             {
                 return View("CharacterNotFound");
