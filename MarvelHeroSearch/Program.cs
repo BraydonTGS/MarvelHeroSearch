@@ -8,7 +8,7 @@ using MarvelHeroSearch.Models.DbModels;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//// Add services to the container.
+// Add services to the container //
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(connectionString));
@@ -19,7 +19,6 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 
 // DB Connection //
-
 var connection = builder.Configuration.GetConnectionString("MarvelHeroes");
 // During the scope of my request // 
 builder.Services.AddScoped<IDbConnection>((s) =>

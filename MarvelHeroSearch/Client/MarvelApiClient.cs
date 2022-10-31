@@ -6,7 +6,6 @@ using Newtonsoft.Json.Linq;
 
 namespace MarvelHeroSearch.Client
 {
-    // ToDo Set up Exception Handling For my Api Calls - Morbius //
     public class MarvelApiClient : IMarvelApiClient
     {
         private const int _maxCharacters = 1562;
@@ -17,6 +16,9 @@ namespace MarvelHeroSearch.Client
         string _privateKey { get; set; }
         string _md5Hash { get; set; }
 
+        // Marvel API Client//
+        readonly HttpClient client = new HttpClient();
+
         public MarvelApiClient()
         {
             _settings = _settings = File.ReadAllText("appsettings.json");
@@ -25,9 +27,6 @@ namespace MarvelHeroSearch.Client
             _md5Hash = JObject.Parse(_settings).GetValue("Hash").ToString();
 
         }
-
-        // Marvel API Client//
-        HttpClient client = new HttpClient();
 
         // Get Character by Name //
         public CharacterDataWrapper GetCharacter(string characterName)
@@ -84,6 +83,7 @@ namespace MarvelHeroSearch.Client
 
             return response;
         }
+
     }
 }
 

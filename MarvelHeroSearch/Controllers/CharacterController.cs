@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using MarvelHeroSearch.Client;
 using MarvelHeroSearch.Models.DbModels;
 using MarvelHeroSearch.Models.Hero;
+using MarvelHeroSearch.Models.HeroComics;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -20,11 +21,13 @@ namespace MarvelHeroSearch.Controllers
 
         private List<Character> _favoriteCharacters { get; set; } = new List<Character>();
 
+
         public CharacterController(IMarvelApiClient response, IHeroRepository hResponse)
         {
             _response = response;
             _heroResponse = hResponse;
         }
+
 
         // Home Page Character Controller //
         public IActionResult Index()
@@ -103,7 +106,6 @@ namespace MarvelHeroSearch.Controllers
             return View(root);
         }
 
-
         // Get a List of 100 Random Characters //
         public IActionResult CharacterList()
         {
@@ -176,6 +178,7 @@ namespace MarvelHeroSearch.Controllers
             return RedirectToAction("Favorites");
         }
 
+        // Delete Character //
         public IActionResult DeleteHero(Character character)
         {
             _heroResponse.DeleteHero(character);
@@ -212,6 +215,10 @@ namespace MarvelHeroSearch.Controllers
                     }
                     character.ComicBooks.Add(comic);
                 }
+                if (comic.title.Length > 25)
+                {
+                    comic.title = comic.title.Substring(0, 25) + "...";
+                }
 
             }
             return View(root);
@@ -246,6 +253,10 @@ namespace MarvelHeroSearch.Controllers
                     }
                     character.ComicBooks.Add(comic);
                 }
+                if (comic.title.Length > 25)
+                {
+                    comic.title = comic.title.Substring(0, 25) + "...";
+                }
 
             }
             return View(root);
@@ -262,8 +273,6 @@ namespace MarvelHeroSearch.Controllers
         {
             return View();
         }
-
-
 
 
     }
