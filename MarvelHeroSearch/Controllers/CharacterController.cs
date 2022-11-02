@@ -19,8 +19,6 @@ namespace MarvelHeroSearch.Controllers
 
         private readonly IHeroRepository _heroResponse;
 
-        private List<Character> _favoriteCharacters { get; set; } = new List<Character>();
-
 
         public CharacterController(IMarvelApiClient response, IHeroRepository hResponse)
         {
@@ -135,6 +133,7 @@ namespace MarvelHeroSearch.Controllers
         // Get List of Favorite Characters //
         public IActionResult Favorites()
         {
+            List<Character> favoriteCharacters = new List<Character>();
             var favorites = _heroResponse.GetAllHeroes();
             if (!favorites.Any())
             {
@@ -145,10 +144,10 @@ namespace MarvelHeroSearch.Controllers
             {
                 var character = _response.GetCharacterById(hero.CharacterId);
                 var favoriteCharacter = character.data.results[0];
-                _favoriteCharacters.Add(favoriteCharacter);
+                favoriteCharacters.Add(favoriteCharacter);
             }
 
-            return View(_favoriteCharacters);
+            return View(favoriteCharacters);
         }
 
         // Add to your Favorite Characters //
