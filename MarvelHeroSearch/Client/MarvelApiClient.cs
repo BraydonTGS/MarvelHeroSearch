@@ -8,9 +8,11 @@ namespace MarvelHeroSearch.Client
 {
     public class MarvelApiClient : IMarvelApiClient
     {
+        // Api Params //
         private const int _maxCharacters = 1562;
         private const string _limit = "100";
 
+        // Api Settings & Keys //
         private string _settings { get; set; }
         string _publicKey { get; set; }
         string _privateKey { get; set; }
@@ -44,14 +46,22 @@ namespace MarvelHeroSearch.Client
         // Get Character by Id //
         public CharacterDataWrapper GetCharacterById(string id)
         {
-            // Assemble The URL //
-            string url = $"https://gateway.marvel.com/v1/public/characters/{id}?&ts=1&apikey={_publicKey}&hash={_md5Hash}";
+            try
+            {
+                // Assemble The URL //
+                string url = $"https://gateway.marvel.com/v1/public/characters/{id}?&ts=1&apikey={_publicKey}&hash={_md5Hash}";
 
-            // Response -> String -> JSON -> Deserialize //
-            var repo = client.GetStringAsync(url).Result;
-            var response = JsonSerializer.Deserialize<CharacterDataWrapper>(repo);
+                // Response -> String -> JSON -> Deserialize //
+                var repo = client.GetStringAsync(url).Result;
+                var response = JsonSerializer.Deserialize<CharacterDataWrapper>(repo);
 
-            return response;
+                return response;
+            }
+            catch
+            {
+
+                return null;
+            }
         }
 
 

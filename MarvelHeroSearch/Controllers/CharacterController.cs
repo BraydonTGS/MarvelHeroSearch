@@ -87,7 +87,8 @@ namespace MarvelHeroSearch.Controllers
             // Character Data Wrapper => Represents everything that a Character has //
             var root = _response.GetCharacterById(characterId);
 
-            if (!root.data.results.Any())
+            // Create a second error view for the api result //
+            if (root == null || !root.data.results.Any())
             {
                 return View("CharacterNotFound");
 
