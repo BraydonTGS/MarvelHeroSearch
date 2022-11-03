@@ -57,10 +57,8 @@
     </div>
 </form>
 
-
+<!--Character Result Container-->
 <div class=" d-flex flex-wrap justify-content-around align-content-around">
-
-    <!--Character Result Container-->
     <div class="d-flex align-content-center">
         <div class="card-container border border-dark border-3 m-3 shadow-lg">
             <div class="card-header p-1">Character Id: @Model.data.results[0].id</div>
@@ -79,7 +77,7 @@
                         Description: <span class="text-dark">@Model.data.results[0].description</span>
                     </h5>
                 </div>
-
+                <!--Buttons For Character Result-->
                 <div class="d-flex justify-content-around align-items">
                     <div class="button-bnt"><a type="button" class="btn btn-lg btn-info m-2 shadow" href="@Model.data.results[0].urls[0].url" target="blank">More Information</a></div>
                     <form asp-controller="Character" asp-action="GetComicsByHeroId">
@@ -93,7 +91,6 @@
                         </div>
                     </form>
                 </div>
-
                 <div class="mt-1 credits"><p>"Data provided by Marvel. © 2014 Marvel"</p></div>
             </div>
         </div>

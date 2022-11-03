@@ -29,13 +29,13 @@ builder.Services.AddScoped<IDbConnection>((s) =>
     return conn;
 });
 
-// Adding Dependency Injection for my DB //
-builder.Services.AddTransient<IHeroRepository, HeroRepository>();
-
 //Add to your Program.cs Before .Build() to enable Hot Reload //
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
-// Dependency Injection //
+// Adding Dependency Injection for my DB //
+builder.Services.AddTransient<IHeroRepository, HeroRepository>();
+
+// Dependency Injection for the API //
 builder.Services.AddTransient<IMarvelApiClient, MarvelApiClient>();
 
 var app = builder.Build();

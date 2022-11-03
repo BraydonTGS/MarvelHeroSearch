@@ -23,7 +23,7 @@
     }
 </style>
 
-<!--Character List-->
+<!--Random List of 100 Characters-->
 <div class="d-flex flex-wrap justify-content-around align-content-around ">
 
     @foreach (var character in Model)
@@ -33,12 +33,12 @@
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between">
                     <h3 class="card-title text-danger">Name: <span class="text-dark">@char.ToUpper(character.name[0])@character.name.Substring(1)</span></h3>
-
                 </div>
                 <hr />
                 <div class="d-flex align-items-center">
                     <img src="@character.GetImage()" class="border border-3 border-dark rounded shadow-lg" alt="..." />
                     <div class="button-container d-flex flex-column justify-content-center align-items-center">
+                        <!--Foreach Character Buttons-->
                         <form asp-controller="Character" asp-action="CharacterSearchById">
                             <div>
                                 <button class="btn btn-lg btn-info m-2 shadow" id="submit" name="searchString" type="submit" style="font-weight:bold;" value="@character.id">More Information</button>

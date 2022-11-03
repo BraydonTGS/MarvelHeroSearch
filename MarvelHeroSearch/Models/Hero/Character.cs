@@ -8,7 +8,7 @@ namespace MarvelHeroSearch.Models.Hero
     {
         public int id { get; set; }
         public string name { get; set; }
-        public string? description { get; set; }
+        public string description { get; set; }
         public CharacterImage? thumbnail { get; set; }
         public string resourceURI { get; set; }
         public ComicList comics { get; set; }

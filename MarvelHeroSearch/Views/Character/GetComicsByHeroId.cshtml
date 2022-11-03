@@ -60,7 +60,7 @@
 </style>
 
 
-<!--Search Bar-->
+<!--Search Bar By Character Name For Comic List-->
 <form asp-controller="Character" asp-action="ComicSearch" class="border border-dark border-3 m-3 p-3 shadow-lg">
     <div>
         <label for="exampleInputEmail1" class="form-label mt-4">Super Hero Name</label>
@@ -79,7 +79,6 @@
                 <div class="d-flex align-items-center justify-content-around mt-2">
                     <h1 class="name card-title text-danger">Name: <span class="text-dark">@Model.data.results[0].name</span></h1>
                     <h1 class="name card-title text-danger">Comics: <span class="text-dark">@Model.data.results[0].comics.available</span></h1>
-
                 </div>
                 <hr class="mt-1" />
                 <div class="d-flex align-items-center justify-content-around">
@@ -87,15 +86,12 @@
                 </div>
                 <hr />
             </div>
-
             <div class="d-flex justify-content-center align-items-center">
-
                 <form asp-controller="Character" asp-action="CharacterSearchById">
                     <div>
                         <button class="btn btn-lg btn-info m-2 shadow" id="submit" name="searchString" type="submit" style="font-weight:bold;" value="@Model.data.results[0].id">More Information</button>
                     </div>
                 </form>
-
                 <form asp-controller="Character" asp-action="AddToFavorites">
                     <div>
                         <button class="btn btn-lg btn-success m-2 shadow" id="submit" name="searchString" type="submit" style="font-weight:bold;" value="@Model.data.results[0].id">Add to Favorites</button>
@@ -125,7 +121,7 @@
                     </div>
                     <hr />
                     <div class="d-flex flex-column justify-content-end align-items-start">
-                        <!--Description-->
+                        <!--Description, Page-Count, Credits-->
                         <h1 class="text-danger comic-list-d">
                             Description: <span class="text-dark">@comic.description</span>
                         </h1>

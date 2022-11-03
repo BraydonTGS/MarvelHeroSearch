@@ -32,7 +32,7 @@
 </style>
 
 
-<!--List of Favorites-->
+<!--List of Favorites Stored in MySQL Database-->
 <div class="d-flex flex-wrap justify-content-around align-content-around ">
 
     @foreach (var character in Model)
@@ -42,7 +42,6 @@
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between">
                     <h3 class="card-title text-danger">Name: <span class="text-dark">@char.ToUpper(character.name[0])@character.name.Substring(1)</span></h3>
-
                 </div>
                 <hr />
                 <div class="d-flex align-items-center">
@@ -59,14 +58,13 @@
                             </div>
                         </form>
                         <div>
-
+                            <!-- Fires the DeleteHero Controller Method after Confirmation-->
                             @using (Html.BeginForm("DeleteHero", "Character", "Post"))
                             {
                                 <input type="hidden" asp-for="@character.id" value="@character.id" />
                                 <input type="submit" class="btn btn-lg btn-danger m-2 shadow" onclick="return confirm('Are you sure you want to delete this Hero?')" value="Delete Hero" />
                             }
                         </div>
-
                     </div>
                 </div>
                 <div class="mt-1 credits"><p>"Data provided by Marvel. © 2014 Marvel"</p></div>
