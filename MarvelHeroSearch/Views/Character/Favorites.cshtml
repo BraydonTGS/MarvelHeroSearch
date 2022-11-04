@@ -31,13 +31,17 @@
     }
 </style>
 
+<!--Favorites Header-->
+<div class="favorites-container border border-dark border-3 m-1 p-1 shadow-lg text-center">
+    <h1 class="h1-header display-1 mt-4 text-warning">My Favorites</h1>
+</div>
 
 <!--List of Favorites Stored in MySQL Database-->
 <div class="d-flex flex-wrap justify-content-around align-content-around ">
 
     @foreach (var character in Model)
     {
-        <div class="card border-dark m-3 shadow-lg">
+        <div class="card border-warning m-3 shadow-lg">
             <div class="card-header">Number: @character.id</div>
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between">
