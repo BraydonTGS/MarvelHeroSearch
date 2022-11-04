@@ -33,14 +33,21 @@ namespace MarvelHeroSearch.Client
         // Get Character by Name //
         public CharacterDataWrapper GetCharacter(string characterName)
         {
-            // Assemble The URL //
-            string url = $"https://gateway.marvel.com:443/v1/public/characters?name={characterName}&ts=1&apikey={_publicKey}&hash={_md5Hash}";
+            try
+            {
+                // Assemble The URL //
+                string url = $"https://gateway.marvel.com:443/v1/public/characters?name={characterName}&ts=1&apikey={_publicKey}&hash={_md5Hash}";
 
-            // Response -> String -> JSON -> Deserialize //
-            var repo = client.GetStringAsync(url).Result;
-            var response = JsonSerializer.Deserialize<CharacterDataWrapper>(repo);
+                // Response -> String -> JSON -> Deserialize //
+                var repo = client.GetStringAsync(url).Result;
+                var response = JsonSerializer.Deserialize<CharacterDataWrapper>(repo);
 
-            return response;
+                return response;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         // Get Character by Id //
@@ -71,27 +78,42 @@ namespace MarvelHeroSearch.Client
             // Random Number for the Offset //
             Random random = new Random();
             var offset = random.Next(_maxCharacters);
-            // Assemble The URL //
-            string url = $"https://gateway.marvel.com:443/v1/public/characters?&ts=1&limit={_limit}&offset={offset}&apikey={_publicKey}&hash={_md5Hash}";
 
-            // Response -> String -> JSON -> Deserialize //
-            var repo = client.GetStringAsync(url).Result;
-            var response = JsonSerializer.Deserialize<CharacterDataWrapper>(repo);
+            try
+            {   // Assemble The URL //
+                string url = $"https://gateway.marvel.com:443/v1/public/characters?&ts=1&limit={_limit}&offset={offset}&apikey={_publicKey}&hash={_md5Hash}";
 
-            return response;
+                // Response -> String -> JSON -> Deserialize //
+                var repo = client.GetStringAsync(url).Result;
+                var response = JsonSerializer.Deserialize<CharacterDataWrapper>(repo);
+
+                return response;
+
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         // Get Comics For a Character by ID //
         public ComicDataWrapper GetCharacterComics(string characterId)
         {
-            // Assemble The URL //
-            string url = $"{characterId}?ts=1&limit=20&apikey={_publicKey}&hash={_md5Hash}";
+            try
+            {
+                // Assemble The URL //
+                string url = $"{characterId}?ts=1&limit=20&apikey={_publicKey}&hash={_md5Hash}";
 
-            // Response -> String -> JSON -> Deserialize //
-            var repo = client.GetStringAsync(url).Result;
-            var response = JsonSerializer.Deserialize<ComicDataWrapper>(repo);
+                // Response -> String -> JSON -> Deserialize //
+                var repo = client.GetStringAsync(url).Result;
+                var response = JsonSerializer.Deserialize<ComicDataWrapper>(repo);
 
-            return response;
+                return response;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
     }

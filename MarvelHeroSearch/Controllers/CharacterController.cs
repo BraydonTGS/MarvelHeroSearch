@@ -45,16 +45,26 @@ namespace MarvelHeroSearch.Controllers
             // Character Data Wrapper => Represents everything that a Character has //
             var root = _response.GetCharacter(searchString);
 
+            // Exception Handling //
+            if (root == null)
+            {
+                return View("ApiRequestError");
+            }
             if (!root.data.results.Any())
             {
                 return View("CharacterNotFound");
-
             }
             // Character Model //
             var character = root.data.results[0];
 
             // Getting the Comics for a Character //
             var myComics = _response.GetCharacterComics(character.comics.collectionURI);
+
+            // Exception Handling //
+            if (myComics == null)
+            {
+                return View("ApiRequestError");
+            }
 
             // Parsing Through the Comics for a Character and adding to the Characters List of Comics //
             foreach (var comic in myComics.data.results)
@@ -87,8 +97,12 @@ namespace MarvelHeroSearch.Controllers
             // Character Data Wrapper => Represents everything that a Character has //
             var root = _response.GetCharacterById(characterId);
 
-            // Create a second error view for the api result //
-            if (root == null || !root.data.results.Any())
+            // Exception Handling //
+            if (root == null)
+            {
+                return View("ApiRequestError");
+            }
+            if (!root.data.results.Any())
             {
                 return View("CharacterNotFound");
 
@@ -98,6 +112,12 @@ namespace MarvelHeroSearch.Controllers
 
             // Getting the Comics for a Character //
             var myComics = _response.GetCharacterComics(character.comics.collectionURI);
+
+            // Exception Handling //
+            if (myComics == null)
+            {
+                return View("ApiRequestError");
+            }
 
             // Parsing Through the Comics for a Character and adding to the Characters List of Comics //
             foreach (var comic in myComics.data.results)
@@ -122,6 +142,12 @@ namespace MarvelHeroSearch.Controllers
         {
             // Character Data Wrapper //
             var root = _response.GetListOfCharacters();
+
+            // Exception Handling //
+            if (root == null)
+            {
+                return View("ApiRequestError");
+            }
 
             // List of Characters //
             var characters = root.data.results;
@@ -166,7 +192,11 @@ namespace MarvelHeroSearch.Controllers
             {
                 // Calling the API for each Character based on Character Id //
                 var character = _response.GetCharacterById(hero.CharacterId);
-
+                // Exception Handling //
+                if (character == null)
+                {
+                    return View("ApiRequestError");
+                }
                 // Grabbing the Character from the Returned Results //
                 var favoriteCharacter = character.data.results[0];
 
@@ -193,7 +223,11 @@ namespace MarvelHeroSearch.Controllers
             // Character Data Wrapper //
             var root = _response.GetCharacterById(characterId);
 
-            // Null Check //
+            // Exception Handling //
+            if (root == null)
+            {
+                return View("ApiRequestError");
+            }
             if (!root.data.results.Any())
             {
                 return View("CharacterNotFound");
@@ -242,6 +276,11 @@ namespace MarvelHeroSearch.Controllers
             // Character Data Wrapper //
             var root = _response.GetCharacter(characterId);
 
+            // Exception Handling //
+            if (root == null)
+            {
+                return View("ApiRequestError");
+            }
             if (!root.data.results.Any())
             {
                 return View("CharacterNotFound");
@@ -252,6 +291,12 @@ namespace MarvelHeroSearch.Controllers
 
             // Grabbing the Comics for This Character //
             var myComics = _response.GetCharacterComics(character.comics.collectionURI);
+
+            // Exception Handling //
+            if (myComics == null)
+            {
+                return View("ApiRequestError");
+            }
 
             // Parsing Comic Information //
             foreach (var comic in myComics.data.results)
@@ -289,6 +334,11 @@ namespace MarvelHeroSearch.Controllers
             // Character Data Wrapper //
             var root = _response.GetCharacterById(characterId);
 
+            // Exception Handling //
+            if (root == null)
+            {
+                return View("ApiRequestError");
+            }
             if (!root.data.results.Any())
             {
                 return View("CharacterNotFound");
@@ -300,6 +350,12 @@ namespace MarvelHeroSearch.Controllers
 
             // Get Comics by Id //
             var myComics = _response.GetCharacterComics(character.comics.collectionURI);
+
+            // Exception Handling //
+            if (myComics == null)
+            {
+                return View("ApiRequestError");
+            }
 
             // Parsing Comics //
             foreach (var comic in myComics.data.results)
