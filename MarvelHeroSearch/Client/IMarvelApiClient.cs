@@ -14,7 +14,6 @@ namespace MarvelHeroSearch.Client
 
         public ComicDataWrapper GetCharacterComics(string id);
 
-
     }
 }
 
