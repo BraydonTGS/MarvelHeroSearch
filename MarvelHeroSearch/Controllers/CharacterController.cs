@@ -37,6 +37,7 @@ namespace MarvelHeroSearch.Controllers
         {
             // Grabbing the Name from the Form //
             var searchString = Request.Form["searchString"];
+
             if (string.IsNullOrWhiteSpace(searchString))
             {
                 return View("CharacterNotFound");
